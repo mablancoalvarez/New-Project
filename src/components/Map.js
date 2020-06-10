@@ -17,7 +17,7 @@ function Maps() {
       });
     }, []);
   
-    return <div id="map">HOLAAAAA</div>
+    return <div id="map"></div>
   }
 
   export default Maps;
