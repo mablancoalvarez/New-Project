@@ -1,14 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import  L  from 'leaflet';
 // import { TileLayer, Marker, Popup} from 'react-leaflet';
 
+const geoPosition = {
+  longitude: -3.6896767999999995,
+  latitude: 40.360345599999995,
+}
+
+
 function Maps() {
+  const [{longitude, latitude}, setLocalPosition] = useState(geoPosition)
     useEffect(() => {
       // create map
-
+      navigator.geolocation.getCurrentPosition(function(position){
+        console.log("Latitude is :", position.coords.latitude);
+        console.log("Longitude is :", position.coords.longitude);
+        setLocalPosition({
+          latitude : position.coords.latitude,
+          longitude : position.coords.longitude,
+          
+      })
+        })
+        
+       let position = [latitude, longitude];
+       console.log(position)
       L.map('map', {
-        center: [49.8419, 24.0315],
-        zoom: 16,
+        center: position,
+        zoom: 12,
         layers: [
           L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution:
@@ -17,7 +35,7 @@ function Maps() {
         ]
       });
     }, []);
-  
+
     return <div id="map"></div>
   }
 
