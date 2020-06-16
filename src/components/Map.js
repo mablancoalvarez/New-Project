@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import L from 'leaflet';
+import  L  from 'leaflet';
 // import { TileLayer, Marker, Popup} from 'react-leaflet';
 
 function Maps() {
     useEffect(() => {
       // create map
+
       L.map('map', {
         center: [49.8419, 24.0315],
         zoom: 16,
