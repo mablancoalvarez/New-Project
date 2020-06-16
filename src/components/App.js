@@ -3,7 +3,13 @@ import '../stylesheets/App.scss';
 import Maps from './Map';
 ;
 
+const geoPosition = {
+  longitude: null,
+  latitude: null
+}
+
 function App() {
+  const [{longitude, latitude}, setLocalPosition] = useState(geoPosition)
 
   useEffect(() => {
      navigator.geolocation.getCurrentPosition(function(position){
