@@ -6,13 +6,12 @@ function App() {
 
   const [localPosition, setLocalPosition] = useState()
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
+    navigator.geolocation.getCurrentPosition(function(position) {
       console.log("Latitude is :", position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
       setLocalPosition({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
-
       })
 
     })
