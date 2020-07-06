@@ -1,39 +1,34 @@
-import React,{ useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../stylesheets/App.scss';
 import Maps from './Map';
-;
-
-const geoPosition = {
-  longitude: '',
-  latitude: '',
-}
 
 function App() {
 
-   const [{longitude, latitude}, setLocalPosition] =  useState(geoPosition)
-  // useEffect(() => {
-    // create map
-    navigator.geolocation.getCurrentPosition(function(position){
+  const [localPosition, setLocalPosition] = useState()
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
       console.log("Latitude is :", position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
-    setLocalPosition({
-        latitude : position.coords.latitude,
-        longitude : position.coords.longitude,
-        
-    })
-    
+      setLocalPosition({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+
       })
-       let position = [latitude, longitude];
-  
+
+    })
+  }, [])
+
+
+  const renderMap = (position) => <Maps latitude={position.latitude} longitude={position.longitude} />
+
   return (
     <div className="App">
-      
-      
-      <Maps latitude={latitude} longitude={longitude}/>
-   
+      {localPosition
+        ? renderMap(localPosition)
+        : null}
     </div>
   );
-  
+
 }
 
 export default App;
